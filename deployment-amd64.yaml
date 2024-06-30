@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-amd64
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world-amd64
+  template:
+    metadata:
+      labels:
+        app: hello-world-amd64
+    spec:
+      containers:
+      - name: hello-world-amd64
+        image: psk8s.azurecr.io/hello-app:1.0
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        kubernetes.io/arch: amd64

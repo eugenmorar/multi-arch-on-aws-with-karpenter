@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-arm64
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world-arm64
+  template:
+    metadata:
+      labels:
+        app: hello-world-arm64
+    spec:
+      containers:
+      - name: hello-world-arm64
+        image: arm64v8/nginx
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        kubernetes.io/arch: arm64
