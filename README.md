@@ -31,7 +31,6 @@ ip-10-0-26-244.ec2.internal cpu █████░░░░░░░░░░░
 
 Verify the Karpenter installation by below command:
 >kubectl get pods -n kube-system | grep karpenter
-
 NAME                         READY   STATUS    RESTARTS   AGE
 karpenter-7c5df57794-m5gjm   1/1     Running   0          5m
 karpenter-7c5df57794-z5d24   1/1     Running   0          5m
