@@ -1,6 +1,6 @@
 # multi-arch-on-aws-with-karpenter
 Configuration in this directory creates an AWS EKS cluster with Karpenter autoscaler using 1 nodepool that acomodates amd64 and arm64 architectures. Karpenter is provisioned on top of an EKS Managed Node Group and defaults to amd64 node types until a proper nodeselector is used to deploy a arm64 application.
-
+```
 spec:
       containers:
       - name: hello-world-arm64
@@ -9,32 +9,35 @@ spec:
         - containerPort: 8080
       nodeSelector:
         kubernetes.io/arch: arm64
+```
 
 ## Deploy
-Initialize and create plan for the Terraform code
-
->terraform init
->terraform plan
-
-Run Terraform Apply to provision into an existing VPC the EKS Cluster with Karpenter autoscaler.
->terraform apply 
-
-Update the kubectl context to interact with the Amazon EKS cluster
->aws eks update-kubeconfig --name eks-multi-arch --region us-east-1
-
->./eks-node-viewer
+Initialize. plan and apply to provision into an existing VPC the EKS Cluster with Karpenter autoscaler.
+```
+terraform init
+terraform plan
+terraform apply 
+```
+Update the kubectl context to interact with the Amazon EKS cluster.
+```
+aws eks update-kubeconfig --name eks-multi-arch --region us-east-1
+```
+Verify the provisioned nodes with eks-node-viewer
+```
+./eks-node-viewer
 2 nodes (500m/3860m) 13.0% cpu █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ $0.192/hour | $140.160/month
 10 pods (0 pending 10 running 10 bound)
 
 ip-10-0-14-11.ec2.internal  cpu █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  13% (5 pods) m5.large/$0.0960 On-Demand - Ready
 ip-10-0-26-244.ec2.internal cpu █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  13% (5 pods) m5.large/$0.0960 On-Demand - Ready
-
+```
 Verify the Karpenter installation by below command:
+```
 >kubectl get pods -n kube-system | grep karpenter
 NAME                         READY   STATUS    RESTARTS   AGE
 karpenter-7c5df57794-m5gjm   1/1     Running   0          5m
 karpenter-7c5df57794-z5d24   1/1     Running   0          5m
-
+```
 ## Test
 Deploy an arm64 application using de deployment-arm64.yaml and explore the karpenter autoscaling using eks-node-viewer. 
 
