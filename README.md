@@ -80,7 +80,7 @@ ip-10-0-26-244.ec2.internal cpu █████░░░░░░░░░░░
 You can notice Karpenter closed all the arm64 instances in the absence of any arm64 workload.
 
 ## Destroy
-To avoid on-going costs, you can destroy the infrastructure using below command:
+To avoid on-going costs, you can destroy the infrastructure using below command: 
 
 terraform destroy -auto-approve
 
