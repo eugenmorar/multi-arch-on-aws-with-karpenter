@@ -22,7 +22,7 @@ Update the kubectl context to interact with the Amazon EKS cluster.
 ```
 aws eks update-kubeconfig --name eks-multi-arch --region us-east-1
 ```
-Verify the provisioned nodes with eks-node-viewer
+Verify the provisioned nodes with eks-node-viewer.
 ```
 ./eks-node-viewer
 2 nodes (500m/3860m) 13.0% cpu █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ $0.192/hour | $140.160/month
@@ -118,5 +118,4 @@ module.vpc.aws_subnet.public[0]
 module.vpc.aws_subnet.public[1]
 module.vpc.aws_subnet.public[2]
 module.vpc.aws_vpc.this[0]
-
 ```
